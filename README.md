@@ -38,11 +38,11 @@ where `dl` is the url for downloading crates and `api` is the base URL for the w
 `api` is optional, but without it commands such `cargo publish` will not work.
 
 Download url should send `.crate` file for the requested package, package name and version are appended 
-to the base url along with `downlowd` word: `{package_name}/{package_version}/download`. `dl` value
+to the base url along with `download` word: `{package_name}/{package_version}/download`. `dl` value
 also may have markers in the url, find more information [here](https://doc.rust-lang.org/cargo/reference/registries.html#index-format).
 
-The rest of the repository index contains one file for each package, where each version metadata are
-present in json format. The files are organized in a tier of directories by the following rules:
+The rest of the repository index contains one file for each package, where each version metadata is
+presented in json format. The files are organized in a tier of directories by the following rules:
 - Packages with 1 char names are placed in a directory named `1`
 - Packages with 2 chars names are placed in a directory named `2`
 - Packages with 3 chars names are placed in the directory `3/{first-char}` where `{first-char}` is 
