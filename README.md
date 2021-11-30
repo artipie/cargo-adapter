@@ -53,6 +53,50 @@ is the first two chars of the package name, and the next subdirectory is the thi
 Package metadata file is named with lowercased package name. For more detailed description check the 
 [documentation](https://doc.rust-lang.org/cargo/reference/registries.html#index-format).
 
+Format of the package metadata file is the following: each line contains `json` object, that contains
+information about published version of the package. Thus, to be placed on one line, this `json` should
+not be pretty-printed (should not contain line-brakes or extra spaces between items). 
+Here is the example of one line, pretty-printed for better understanding:
+```json
+{
+    // The name of the package.
+    "name": "foo",
+    // The version of the package this row is describing.
+    "vers": "0.1.0",
+    // Array of direct dependencies of the package.
+    "deps": [
+        {
+            // Name of the dependency.
+            "name": "rand",
+            // The semver requirement for this dependency.
+            "req": "^0.6",
+            // Array of features (as strings) enabled for this dependency.
+            "features": ["i128_support"],
+            // Boolean of whether or not this is an optional dependency.
+            "optional": false,
+            // Boolean of whether or not default features are enabled.
+            "default_features": true,
+            //etc
+        }
+    ],
+    // A SHA256 checksum of the `.crate` file.
+    "cksum": "d867001db0e2b6e0496f9fac96930e2d42233ecd3ca0413e0753d4c7695d289c",
+    // Set of features defined for the package.
+    // Each feature maps to an array of features or dependencies it enables.
+    "features": {
+        "extras": ["rand/simd_support"]
+    },
+    // Boolean of whether or not this version has been yanked.
+    "yanked": false,
+    // The `links` string value from the package's manifest, or null if not
+    // specified. This field is optional and defaults to null.
+    "links": null
+}
+```
+The full set of package version properties can be found [here](https://doc.rust-lang.org/cargo/reference/manifest.html). 
+The only field, that can be modified in the `json` objects is `yanked`, this field should be set 
+to `true` with [`cargo yank`](https://doc.rust-lang.org/cargo/commands/cargo-yank.html) command.
+
 # How to contribute
 Fork repository, make changes, send us a pull request. We will review your changes and apply them 
 to the master branch shortly, provided they don't violate our quality standards. To avoid frustration, 
