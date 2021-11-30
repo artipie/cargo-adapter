@@ -11,6 +11,8 @@ import com.artipie.http.hm.RsHasHeaders;
 import com.artipie.http.hm.RsHasStatus;
 import com.artipie.http.rs.RsStatus;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -24,8 +26,11 @@ class RsErrorTest {
 
     @Test
     void responseWithOkStatusJsonBodyAndHeader() {
+        final List<String> inp = new LinkedList<>();
+        inp.add("first message");
+        inp.add("second message");
         MatcherAssert.assertThat(
-            new RsError("first message", "second message"),
+            new RsError(inp),
             Matchers.allOf(
                 new RsHasStatus(RsStatus.OK),
                 new RsHasHeaders(
