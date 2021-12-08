@@ -5,12 +5,17 @@
 package com.artipie.cargo.http;
 
 import com.artipie.http.Slice;
-import com.artipie.http.rs.StandardRs;
+import com.artipie.http.rq.RqMethod;
+import com.artipie.http.rt.ByMethodsRule;
+import com.artipie.http.rt.RtRule;
+import com.artipie.http.rt.RtRulePath;
+import com.artipie.http.rt.SliceRoute;
 import com.artipie.http.slice.SliceSimple;
 
 /**
  * Main cargo repo entry point.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class CargoSlice extends Slice.Wrap {
 
@@ -18,6 +23,20 @@ public final class CargoSlice extends Slice.Wrap {
      * Ctor.
      */
     public CargoSlice() {
-        super(new SliceSimple(StandardRs.OK));
+        super(
+            new SliceRoute(
+                new RtRulePath(
+                    new RtRule.All(
+                        new RtRule.ByPath("/api/v1/crates/new"),
+                        new ByMethodsRule(RqMethod.PUT)
+                    ),
+                    new PublishSlice()
+                ),
+                new RtRulePath(
+                    RtRule.FALLBACK,
+                    new SliceSimple(new RsError("Endpoint does not exists"))
+                )
+            )
+        );
     }
 }
