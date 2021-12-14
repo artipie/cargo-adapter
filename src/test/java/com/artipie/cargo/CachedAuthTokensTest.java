@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link CachedAuthTokens}.
- * @since 0.5
+ * @since 0.1
  * @checkstyle MagicNumberCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -102,7 +102,7 @@ class CachedAuthTokensTest {
 
     /**
      * Fake implementation of {@link AuthTokens}.
-     * @since 0.5
+     * @since 0.1
      * @checkstyle JavadocVariableCheck (500 lines)
      */
     static class FakeAuthTokens implements AuthTokens {
