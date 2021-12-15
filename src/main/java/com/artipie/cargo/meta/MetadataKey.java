@@ -7,15 +7,17 @@ package com.artipie.cargo.meta;
 import com.artipie.asto.Key;
 
 /**
- * Cargo metadata file name by name of the package. The rules are:<br/>
- * - Packages with 1 character names are placed in a directory named 1.<br/>
- * - Packages with 2 character names are placed in a directory named 2.
- * - Packages with 3 character names are placed in the directory 3/{first-character}
- * where {first-character} is the first character of the package name.<br/>
- * - All other packages are stored in directories named {first-two}/{second-two} where the top
+ * Cargo metadata file name by name of the package. The rules are:
+ * <ul>
+ * <li>Packages with 1 character names are placed in a directory named {@code 1}.</li>
+ * <li>Packages with 2 character names are placed in a directory named {@code 2}.</li>
+ * <li>Packages with 3 character names are placed in the directory {@code 3/&#123;first-character&#125;},
+ * where {@code &#123;first-character&#125;} is the first character of the package name.</li>
+ * <li>All other packages are stored in directories named {@code &#123;first-two&#125;/&#123;second-two&#125;} where the top
  * directory is the first two characters of the package name, and the next subdirectory is the
  * third and fourth characters of the package name. For example, cargo would be stored in a file
- * named ca/rg/cargo. <br/>
+ * named {@code ca/rg/cargo}.</li>
+ * </ul>
  * The name of the file is package name.
  * For more details check <a href="https://doc.rust-lang.org/cargo/reference/registries.html#index-format">docs</a>.
  * @since 0.1
