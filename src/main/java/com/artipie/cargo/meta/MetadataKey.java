@@ -11,9 +11,11 @@ import com.artipie.asto.Key;
  * <ul>
  * <li>Packages with 1 character names are placed in a directory named {@code 1}.</li>
  * <li>Packages with 2 character names are placed in a directory named {@code 2}.</li>
- * <li>Packages with 3 character names are placed in the directory {@code 3/&#123;first-character&#125;},
- * where {@code &#123;first-character&#125;} is the first character of the package name.</li>
- * <li>All other packages are stored in directories named {@code &#123;first-two&#125;/&#123;second-two&#125;} where the top
+ * <li>Packages with 3 character names are placed in the directory
+ * {@code 3/first-character}, where {@code first-character} is the first
+ * character of the package name.</li>
+ * <li>All other packages are stored in directories named
+ * {@code first-two/second-two} where the top
  * directory is the first two characters of the package name, and the next subdirectory is the
  * third and fourth characters of the package name. For example, cargo would be stored in a file
  * named {@code ca/rg/cargo}.</li>
@@ -44,14 +46,19 @@ public final class MetadataKey {
      */
     public Key get() {
         final Key res;
-        if (this.pkg.length() == 1) {
-            res = new Key.From("1");
-        } else if (this.pkg.length() == 2) {
-            res = new Key.From("2");
-        } else if (this.pkg.length() == 3) {
-            res = new Key.From("3", this.pkg.substring(0, 1));
-        } else {
-            res = new Key.From(this.pkg.substring(0, 2), this.pkg.substring(2, 4));
+        switch (this.pkg.length()) {
+            case 1:
+                res = new Key.From("1");
+                break;
+            case 2:
+                res = new Key.From("2");
+                break;
+            case 3:
+                res = new Key.From("3", this.pkg.substring(0, 1));
+                break;
+            default:
+                res = new Key.From(this.pkg.substring(0, 2), this.pkg.substring(2, 4));
+                break;
         }
         return new Key.From(res, this.pkg);
     }
