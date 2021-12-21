@@ -4,6 +4,7 @@
  */
 package com.artipie.cargo.http;
 
+import com.artipie.asto.Storage;
 import com.artipie.http.Slice;
 import com.artipie.http.rq.RqMethod;
 import com.artipie.http.rt.ByMethodsRule;
@@ -21,8 +22,9 @@ public final class CargoSlice extends Slice.Wrap {
 
     /**
      * Ctor.
+     * @param asto Storage
      */
-    public CargoSlice() {
+    public CargoSlice(final Storage asto) {
         super(
             new SliceRoute(
                 new RtRulePath(
@@ -31,6 +33,13 @@ public final class CargoSlice extends Slice.Wrap {
                         new ByMethodsRule(RqMethod.PUT)
                     ),
                     new PublishSlice()
+                ),
+                new RtRulePath(
+                    new RtRule.All(
+                        new RtRule.ByPath(YankSlice.YANK_PTRN),
+                        new ByMethodsRule(RqMethod.DELETE, RqMethod.PUT)
+                    ),
+                    new YankSlice(asto)
                 ),
                 new RtRulePath(
                     RtRule.FALLBACK,

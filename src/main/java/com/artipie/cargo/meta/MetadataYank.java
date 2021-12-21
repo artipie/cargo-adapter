@@ -51,7 +51,7 @@ public final class MetadataYank implements
     @SuppressWarnings("PMD.AssignmentInOperand")
     public Boolean apply(final Optional<InputStream> input, final OutputStream output) {
         if (!input.isPresent()) {
-            throw new ArtipieException("Package metadata does not exists!");
+            throw new ArtipieException("Package metadata does not exist!");
         }
         final String vers = String.format("\"vers\":\"%s\"", this.version);
         try (
