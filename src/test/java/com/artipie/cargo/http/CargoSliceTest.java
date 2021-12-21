@@ -4,6 +4,7 @@
  */
 package com.artipie.cargo.http;
 
+import com.artipie.asto.memory.InMemoryStorage;
 import com.artipie.http.hm.RsHasStatus;
 import com.artipie.http.hm.SliceHasResponse;
 import com.artipie.http.rq.RequestLine;
@@ -21,7 +22,7 @@ class CargoSliceTest {
     @Test
     void returnsOk() {
         MatcherAssert.assertThat(
-            new CargoSlice(),
+            new CargoSlice(new InMemoryStorage()),
             new SliceHasResponse(
                 new RsHasStatus(RsStatus.OK),
                 new RequestLine(RqMethod.GET, "/")
