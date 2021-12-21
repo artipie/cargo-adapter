@@ -22,6 +22,8 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * Test for {@link YankSlice}.
@@ -41,8 +43,12 @@ class YankSliceTest {
         this.asto = new InMemoryStorage();
     }
 
-    @Test
-    void yankesMetadataAndReturnsOk() {
+    @ParameterizedTest
+    @CsvSource({
+        "yank,true,DELETE",
+        "unyank,false,PUT"
+    })
+    void yankesMetadataAndReturnsOk(final String cmd, final boolean res, final RqMethod method) {
         final String name = "my-project";
         this.asto.save(
             new MetadataKey(name).get(),
@@ -60,7 +66,7 @@ class YankSliceTest {
                     new RsHasBody("{\"ok\":true}".getBytes(StandardCharsets.UTF_8))
                 ),
                 new RequestLine(
-                    RqMethod.DELETE, String.format("/api/v1/crates/%s/0.1.2/yank", name)
+                    method, String.format("/api/v1/crates/%s/0.1.2/%s", name, cmd)
                 )
             )
         );
@@ -69,7 +75,7 @@ class YankSliceTest {
             new BlockingStorage(this.asto).value(new MetadataKey(name).get()),
             new IsEqual<>(
                 Json.createObjectBuilder().add("name", name).add("vers", "0.1.2")
-                    .add("yank", true).build().toString().getBytes(StandardCharsets.UTF_8)
+                    .add("yank", res).build().toString().getBytes(StandardCharsets.UTF_8)
             )
         );
     }

@@ -37,7 +37,7 @@ public final class CargoSlice extends Slice.Wrap {
                 new RtRulePath(
                     new RtRule.All(
                         new RtRule.ByPath(YankSlice.YANK_PTRN),
-                        new ByMethodsRule(RqMethod.DELETE)
+                        new ByMethodsRule(RqMethod.DELETE, RqMethod.PUT)
                     ),
                     new YankSlice(asto)
                 ),
