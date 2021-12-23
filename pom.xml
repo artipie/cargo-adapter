@@ -96,6 +96,11 @@ SOFTWARE.
       <version>v1.8.0</version>
     </dependency>
     <dependency>
+      <groupId>com.artipie</groupId>
+      <artifactId>git-adapter</artifactId>
+      <version>0.0.4</version>
+    </dependency>
+    <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-log</artifactId>
     </dependency>

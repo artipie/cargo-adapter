@@ -14,7 +14,7 @@ import javax.json.JsonObject;
  * Valid package metadata.
  * @since 0.1
  */
-final class ValidMetadata {
+public final class ValidMetadata {
 
     /**
      * Package name regex.
@@ -37,7 +37,7 @@ final class ValidMetadata {
      * Ctor.
      * @param meta Cargo package metadata
      */
-    ValidMetadata(final JsonObject meta) {
+    public ValidMetadata(final JsonObject meta) {
         this.meta = meta;
     }
 
@@ -45,8 +45,8 @@ final class ValidMetadata {
      * Ctor.
      * @param meta Cargo package metadata string
      */
-    ValidMetadata(final String meta) {
-        this(Json.createParser(new StringReader(meta)).getObject());
+    public ValidMetadata(final String meta) {
+        this(Json.createReader(new StringReader(meta)).readObject());
     }
 
     /**
@@ -54,7 +54,7 @@ final class ValidMetadata {
      * @return Name
      * @throws ArtipieException If name is not valid
      */
-    String validName() {
+    public String validName() {
         final String name = this.meta.getString("name");
         if (ValidMetadata.NAME.matcher(name).matches()) {
             return name;
@@ -70,7 +70,7 @@ final class ValidMetadata {
      * @return Version
      * @throws ArtipieException If name is not valid
      */
-    String validVersion() {
+    public String validVersion() {
         final String vers = this.meta.getString("vers");
         if (ValidMetadata.VER.matcher(vers).matches()) {
             return vers;

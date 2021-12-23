@@ -32,7 +32,7 @@ public final class CargoSlice extends Slice.Wrap {
                         new RtRule.ByPath("/api/v1/crates/new"),
                         new ByMethodsRule(RqMethod.PUT)
                     ),
-                    new PublishSlice()
+                    new PublishSlice(asto)
                 ),
                 new RtRulePath(
                     new RtRule.All(
