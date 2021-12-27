@@ -5,6 +5,7 @@
 package com.artipie.cargo.http;
 
 import com.artipie.asto.Storage;
+import com.artipie.git.http.GitSlice;
 import com.artipie.http.Slice;
 import com.artipie.http.rq.RqMethod;
 import com.artipie.http.rt.ByMethodsRule;
@@ -40,6 +41,10 @@ public final class CargoSlice extends Slice.Wrap {
                         new ByMethodsRule(RqMethod.DELETE, RqMethod.PUT)
                     ),
                     new YankSlice(asto)
+                ),
+                new RtRulePath(
+                    new ByMethodsRule(RqMethod.GET, RqMethod.PUT),
+                    new GitSlice(asto)
                 ),
                 new RtRulePath(
                     RtRule.FALLBACK,
