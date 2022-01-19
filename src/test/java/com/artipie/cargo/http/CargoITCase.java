@@ -10,7 +10,6 @@ import com.artipie.http.slice.LoggingSlice;
 import com.artipie.vertx.VertxSliceServer;
 import com.jcabi.log.Logger;
 import io.vertx.reactivex.core.Vertx;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.cactoos.list.ListOf;
@@ -55,7 +54,7 @@ public final class CargoITCase {
     private GenericContainer<?> cntn;
 
     @BeforeEach
-    void init() throws IOException {
+    void init() throws Exception {
         final int port = new RandomFreePort().get();
         final String url = String.format("http://host.testcontainers.internal:%d", port);
         this.server = new VertxSliceServer(
@@ -79,9 +78,14 @@ public final class CargoITCase {
         );
         this.cntn = new GenericContainer<>("rust:slim")
             .withCommand("tail", "-f", "/dev/null")
+            .withEnv("CARGO_NET_GIT_FETCH_WITH_CLI", "true")
+            .withEnv("GIT_TRACE", "true")
             .withWorkingDirectory("/home/")
             .withFileSystemBind(this.tmp.toString(), "/home");
         this.cntn.start();
+        this.exec("apt", "update");
+        this.exec("apt", "install", "-y", "git");
+        this.exec("git", "--version");
     }
 
     @AfterEach
@@ -92,6 +96,7 @@ public final class CargoITCase {
 
     @Test
     void canPush() throws Exception {
+        this.exec("cargo", "version");
         this.exec("cargo", "new", "hello_world");
         MatcherAssert.assertThat(
             this.exec(

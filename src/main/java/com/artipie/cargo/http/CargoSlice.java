@@ -43,7 +43,7 @@ public final class CargoSlice extends Slice.Wrap {
                     new YankSlice(asto)
                 ),
                 new RtRulePath(
-                    new ByMethodsRule(RqMethod.GET, RqMethod.PUT),
+                    new ByMethodsRule(RqMethod.GET, RqMethod.PUT, RqMethod.POST),
                     new GitSlice(asto)
                 ),
                 new RtRulePath(
