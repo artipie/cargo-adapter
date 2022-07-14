@@ -1,19 +1,21 @@
-<img src="https://www.artipie.com/logo.svg" width="64px" height="64px"/>
+<a href="http://artipie.com"><img src="https://www.artipie.com/logo.svg" width="64px" height="64px"/></a>
+
+[![Join our Telegramm group](https://img.shields.io/badge/Join%20us-Telegram-blue?&logo=telegram&?link=http://right&link=http://t.me/artipie)](http://t.me/artipie)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/artipie/cargo-adapter)](http://www.rultor.com/p/artipie/cargo-adapter)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Javadoc](http://www.javadoc.io/badge/com.artipie/cargo-adapter.svg)](http://www.javadoc.io/doc/com.artipie/cargo-adapter)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/com.artipie/cargo-adapter/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/artipie/cargo-adapter/blob/master/LICENSE.txt)
 [![codecov](https://codecov.io/gh/artipie/cargo-adapter/branch/master/graph/badge.svg)](https://codecov.io/gh/artipie/cargo-adapter)
 [![Hits-of-Code](https://hitsofcode.com/github/artipie/cargo-adapter)](https://hitsofcode.com/view/github/artipie/cargo-adapter)
 [![Maven Central](https://img.shields.io/maven-central/v/com.artipie/cargo-adapter.svg)](https://maven-badges.herokuapp.com/maven-central/com.artipie/cargo-adapter)
 [![PDD status](http://www.0pdd.com/svg?name=artipie/cargo-adapter)](http://www.0pdd.com/p?name=artipie/cargo-adapter)
 
-This Java library turns your binary storage (files, S3 objects, anything) into Cargo repository - 
-Rust Package Registry. You may add it to your binary storage and it will become a fully-functionable 
-repository, which [cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) will perfectly understand.
+This Java library turns binary storage (files, S3 objects, anything) into Cargo repository - 
+Rust Package Registry. It is a part of [Artipie](https://github.com/artipie) binary artifact management tool 
+and provides a fully-functionable Rust Registry, which [cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) can perfectly understand.
 
 Some valuable references and need-to-know:
 - Cargo is a [Rust](https://www.rust-lang.org/) package manager. Cargo manages project dependencies, 
@@ -24,7 +26,11 @@ compile sources and distribute arttifdacts to repositories.
 - Default Cargo repository is https://crates.io, Sources of crates.io: https://github.com/rust-lang/crates.io
 - Start Crates with docker-compose: https://github.com/rust-lang/crates.io/blob/master/docs/CONTRIBUTING.md#running-cratesio-with-docker
 
-# Repository index format
+If you have any question or suggestions, do not hesitate to [create an issue](https://github.com/artipie/cargo-adapter/issues/new) or contact us in
+[Telegram](https://t.me/artipie).  
+Artipie [roadmap](https://github.com/orgs/artipie/projects/3).
+
+# Repository structure
 Repository indexes are stored in the git repository, which allows cargo efficiently fetch incremental updates. 
 In the repository root `config.json` should be located, this file contains the info for accessing the 
 registry:
@@ -106,4 +112,4 @@ before sending us your pull request please run full Maven build:
 $ mvn clean install -Pqulice
 ```
 
-To avoid build errors use Maven 3.2+.
+To avoid build errors use Maven 3.2+ and please read [contributing rules](https://github.com/artipie/artipie/blob/master/CONTRIBUTING.md).
